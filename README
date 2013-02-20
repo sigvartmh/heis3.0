@@ -1,7 +1,7 @@
-README
-Hi, oh I'm here please read me
+#README
+<hi, oh I'm here please read me>
 
-# Important if you ARE going to code
+## Important if you ARE going to code on this project
 Code conventions:
 - Code is coded in english
 * Only small letters in filename no symbols whitespaces or numbers
@@ -20,3 +20,7 @@ Name Explenations:
 - ui=user interface
 - sm=state machine
 - elev=elevator
+- queues = queue system
+
+Class syntax:
+* (filename)_function_name();
