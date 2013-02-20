@@ -10,11 +10,11 @@ Code conventions:
 - File and header name should be the same
 - CamelCase for variableNames
 - Underscore for function_names 
-- for typer use type_t
---struct myType_t
---enum my_enum_t
-- Big letters for #define's and ENUM's
-	#define CONSTANT 5
+* for typer use type_t
+	* struct myType_t
+	* enum my_enum_t
+* Big letters for #define's and ENUM's
+	* #define CONSTANT 5
 
 Name Explenations:
 - ui=user interface
