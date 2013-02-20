@@ -1,7 +1,5 @@
 README
-
-Hi
-O'h I'm here please read me
+Hi, oh I'm here please read me
 
 Code conventions:
 - Code is coded in english
@@ -17,7 +15,7 @@ Code conventions:
 - Big letters for #define's and ENUM's
 	#define CONSTANT 5
 
-Name Explenations
-ui=user interface
-sm=state machine
-elev=elevator
+Name Explenations:
+- ui=user interface
+- sm=state machine
+- elev=elevator
