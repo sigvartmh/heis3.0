@@ -4,7 +4,7 @@ Hi, oh I'm here please read me
 Code conventions:
 - Code is coded in english
 - Only small letters in filename no symbols whitespaces or numbers
---myfile.c
+# myfile.c
 --myheader.h
 - File and header name should be the same
 - CamelCase for variableNames
