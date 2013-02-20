@@ -86,7 +86,7 @@ typedef enum tag_elev_lamp_type {
 /**
   State types for statemachine
 */
-typedef enum STATES { 
+typedef enum states { 
     IDLE = 0, 
     UP = 1, 
     DOWN = 2,

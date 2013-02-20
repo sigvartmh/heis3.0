@@ -34,7 +34,7 @@ int main()
 
         // STATEMACHINE
         // Trenger en metode for å sjekke knapp input og legge det i kø array
-        switch(current_state)
+        switch(current_state_t)
         {
             
             case IDLE:
