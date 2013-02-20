@@ -4,14 +4,14 @@ Hi, oh I'm here please read me
 Code conventions:
 - Code is coded in english
 - Only small letters in filename no symbols whitespaces or numbers
-	-myfile.c
-	-myheader.h
+--myfile.c
+--myheader.h
 - File and header name should be the same
 - CamelCase for variableNames
 - Underscore for function_names 
 - for typer use type_t
-	-struct myType_t
-	-enum my_enum_t
+--struct myType_t
+--enum my_enum_t
 - Big letters for #define's and ENUM's
 	#define CONSTANT 5
 
