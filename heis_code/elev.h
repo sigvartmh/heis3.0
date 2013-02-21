@@ -43,15 +43,6 @@ int elev_get_obstruction_signal(void);
 int elev_get_stop_signal(void);
 
 
-
-/**
-  Turn stop lamp on or off.
-  @param value Non-zero value turns lamp on, 0 turns lamp off.
-*/
-void elev_set_stop_lamp(int value);
-
-
-
 /**
   Get floor sensor signal.
   @return -1 if elevator is not on a floor. 0-3 if elevator is on floor. 0 is
@@ -59,13 +50,6 @@ void elev_set_stop_lamp(int value);
 */
 int elev_get_floor_sensor_signal(void);
 
-
-
-/**
-  Set floor indicator lamp for a given floor.
-  @param floor Which floor lamp to turn on. Other floor lamps are turned off.
-*/
-void elev_set_floor_indicator(int floor);
 
 /** Egenkode
   @returns current floor indicator lamp value
@@ -118,7 +102,7 @@ void elev_set_button_lamp(elev_button_type_t button, int floor, int value);
 
 
 /**
-  Initialize elevator.
+  Initialize elevator hardware.
   @return Non-zero on success, 0 on failure.
 */
 int elev_init(void);

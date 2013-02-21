@@ -21,7 +21,13 @@ int main()
         printf(__FILE__ ": Unable to initialize elevator hardware\n");
         return 1;
     }
-    
+
+    if (!ui_init()) 
+    {
+        printf(__FILE__ ": Unable to initialize elevator user interface\n");
+        return 1;
+    }
+
     printf("Activate obstruction and press the STOP button to stop elevator and exit program.\n");
     
     //Move elevator towards next bottom floor 
