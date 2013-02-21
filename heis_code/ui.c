@@ -3,7 +3,47 @@
 */
 #include "ui.h"
 #include "elev.h"
+#include "ui.h"
+#include "io.h"
+#include "channels.h"
 
+void ui_check_buttons(void){
+
+}
+
+void ui_set_button_lamp(ui_button_type_t button, int floor, int value)
+{
+	// assert crashes the program deliberately if it's condition does not hold,
+	// and prints an informative error message. Useful for debugging.
+    assert(floor >= 0);
+    assert(floor < N_FLOORS);
+    assert(!(button == BUTTON_CALL_UP && floor == N_FLOORS-1));
+    assert(!(button == BUTTON_CALL_DOWN && floor == 0));
+    assert(button == BUTTON_CALL_UP || button == BUTTON_CALL_DOWN || button ==
+            BUTTON_COMMAND);
+
+    if (value == 1)
+        io_set_bit(lamp_channel_matrix[floor][button]);
+    else
+        io_clear_bit(lamp_channel_matrix[floor][button]);        
+}
+
+int ui_get_button_signal(ui_button_type_t button, int floor)
+{
+	// assert crashes the program deliberately if it's condition does not hold,
+	// and prints an informative error message. Useful for debugging.
+    assert(floor >= 0);
+    assert(floor < N_FLOORS);
+    assert(!(button == BUTTON_CALL_UP && floor == N_FLOORS-1));
+    assert(!(button == BUTTON_CALL_DOWN && floor == 0));
+    assert(button == BUTTON_CALL_UP || button == BUTTON_CALL_DOWN || button ==
+            BUTTON_COMMAND);
+
+    if (io_read_bit(button_channel_matrix[floor][button]))
+        return 1;
+    else
+        return 0;
+}
 
 
 void ui_remove_order_light(int floor,int direction)
@@ -58,4 +98,80 @@ void ui_remove_order_light(int floor,int direction)
 			break;
 		}
 	}
+}
+
+void ui_set_door_open_lamp(bool value)
+{
+    if (value)
+        io_set_bit(DOOR_OPEN);
+    else
+        io_clear_bit(DOOR_OPEN);
+}
+
+//elev_get_stop_signal=value
+void ui_set_stop_lamp(bool value)
+{
+    if (value)
+        io_set_bit(LIGHT_STOP);
+    else
+        io_clear_bit(LIGHT_STOP);
+}
+
+void ui_set_floor_indicator(int floor)
+{
+	// assert crashes the program deliberately if it's condition does not hold,
+	// and prints an informative error message. Useful for debugging.
+    assert(floor >= 0);
+    assert(floor < N_FLOORS);
+
+    if (floor & 0x02)
+        io_set_bit(FLOOR_IND1);
+    else
+        io_clear_bit(FLOOR_IND1);
+        
+    if (floor & 0x01)
+        io_set_bit(FLOOR_IND2);
+    else
+        io_clear_bit(FLOOR_IND2);
+}
+
+//own added function reads FLOOR_IND1 and FLOOR_IND2 and returns the floor number which the elevator was at. 
+//returns previous floor from 0 to 3
+int ui_get_floor_indicator()
+{
+    int bit1=io_read_bit(FLOOR_IND1);
+    int bit2=io_read_bit(FLOOR_IND1);
+
+    if ((bit1 && bit2)==0)
+        return 0;
+    else if(bit1 == 1 && bit2 == 0)
+        return 1;
+    else if(bit1 == 0 && bit2 == 1)
+        return 2;
+    else if(bit1 == 1 && bit2 == 1)
+        return 3;
+    else
+        return -1; //for debugging purposes
+}   
+
+bool ui_init(void)
+{
+
+	// Zero all floor button lamps
+    for (int i = 0; i < N_FLOORS; ++i) {
+        if (i != 0)
+            ui_set_button_lamp(BUTTON_CALL_DOWN, i, 0);
+
+        if (i != N_FLOORS-1)
+            ui_set_button_lamp(BUTTON_CALL_UP, i, 0);
+
+        ui_set_button_lamp(BUTTON_COMMAND, i, 0);
+    }
+
+    // Clear stop lamp, door open lamp, sets floor indicator to ground floor
+    ui_set_stop_lamp(0);
+    ui_set_door_open_lamp(0);
+	ui_set_floor_indicator(0);
+    // Return success.
+    return 1;
 }
