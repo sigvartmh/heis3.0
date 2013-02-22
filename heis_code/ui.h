@@ -1,7 +1,7 @@
 #ifndef H_UI
 #define H_UI
 
-typedef enum tag_elev_lamp_type { 
+typedef enum tag_ui_lamp_type { 
     BUTTON_CALL_UP = 0, 
     BUTTON_CALL_DOWN = 1, 
     BUTTON_COMMAND = 2 
