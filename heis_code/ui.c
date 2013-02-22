@@ -23,7 +23,7 @@ static const int button_channel_matrix[N_FLOORS][N_BUTTONS] =
 
 
 void ui_check_buttons(void){
-
+    for(int i=0;i<N_BUTTONS;i++)
 
 }
 
