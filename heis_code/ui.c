@@ -21,12 +21,33 @@ static const int lamp_channel_matrix[N_FLOORS][N_BUTTONS] =
 static const int button_channel_matrix[N_FLOORS][N_BUTTONS] =
   {SCM_SET(1), SCM_SET(2), SCM_SET(3), SCM_SET(4)};
 
-
+//add to queue.c? to decrease dependancy
 void ui_check_buttons(void){
-    for(int i=0;i<N_BUTTONS;i++)
+    static bool button_pushed[N_BUTTONS][N_FLOORS] = {{0}};
+    for(for int button=0; button<N_BUTTONS; button++){
+        for(floor=0; floor<N_FLOORS; floor++){
+            // Skip non-existing buttons
+            if((floor == 0 && button == BUTTON_CALL_DOWN) 
+                || (floor == 3 && button == BUTTON_CALL_UP)) 
+                continue;
+            else if(ui_get_button_signal(button, floor))
+            {
+                button_pushed[button][floor] = TRUE;
+            }
+            // If button is now released, register order
+            else if(button_pushed[button][floor] == TRUE)
+            {
+                button_pushed[button][floor] = FALSE;
+                //add_to_queues(button,floor,1)
+                ui_set_button_lamp(button, floor, 1);
+            }
+        }
+    }
 
 }
 
+//maybe let the queue arrays in queues handle button lamps?
+//to decrease dependancy
 void ui_set_button_lamp(ui_button_type_t button, int floor, int value)
 {
 	// assert crashes the program deliberately if it's condition does not hold,
@@ -168,7 +189,8 @@ int ui_get_floor_indicator()
         return 3;
     else
         return -1; //for debugging purposes
-}   
+}
+
 
 bool ui_init(void)
 {

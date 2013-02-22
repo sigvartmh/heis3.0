@@ -12,8 +12,8 @@ int main()
 { 
     // Initialize global queue arrays
     // kanskje de ikke skal være global?
-    int *queue_up    = {0,0,0,0};
-    int *queue_down  = {0,0,0,0};
+    // int *queue_up    = {0,0,0,0};
+    // int *queue_down  = {0,0,0,0};
 
     // Initialize hardware
     if (!elev_init()) 
