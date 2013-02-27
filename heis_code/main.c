@@ -12,8 +12,8 @@ int main()
 { 
     // Initialize global queue arrays
     // kanskje de ikke skal være global?
-    int *queue_up    = {0,0,0,0};
-    int *queue_down  = {0,0,0,0};
+    // int *queue_up    = {0,0,0,0};
+    // int *queue_down  = {0,0,0,0};
 
     // Initialize hardware
     if (!elev_init()) 
@@ -21,7 +21,13 @@ int main()
         printf(__FILE__ ": Unable to initialize elevator hardware\n");
         return 1;
     }
-    
+
+    if (!ui_init()) 
+    {
+        printf(__FILE__ ": Unable to initialize elevator user interface\n");
+        return 1;
+    }
+
     printf("Activate obstruction and press the STOP button to stop elevator and exit program.\n");
     
     //Move elevator towards next bottom floor 
